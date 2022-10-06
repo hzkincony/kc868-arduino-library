@@ -1,0 +1,35 @@
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+
+KC868   KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+
+open    KEYWORD2
+close   KEYWORD2
+poll    KEYWORD2
+readSwitch  KEYWORD2
+readSwitchCache KEYWORD2
+writeSwitch KEYWORD2
+setSwitchChangeHook KEYWORD2
+setSensorChangeHook KEYWORD2
+setReadMode KEYWORD2
+
+
+###########################################
+# structures (KEYWORD3)
+###########################################
+
+
+###########################################
+# constants (LITERAL1)
+###########################################
+
+
+###########################################
+# ? (LITERAL2)
+###########################################
+
