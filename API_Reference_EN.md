@@ -138,7 +138,7 @@ This library for KC868-H32B Pro smart controller based on ESP32 chip, you should
 
 - **boolean readSensor(int idx)**
 
-  - Read the state of the input sensor with the specified channel number. The range of the parameter 'idx' is 1-6, corresponding to 6 digital input ports.
+  - Read the state of the input sensor with the specified channel number. The range of the parameter `idx` is 1-6, corresponding to 6 digital input ports.
   - The return value is of type `boolean`, `true` is triggered, `flase` is not triggered.
   - Code example:
 
