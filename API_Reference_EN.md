@@ -1,8 +1,6 @@
 # kc868-arduino-library  API Reference
 [English](https://github.com/hzkincony/kc868-arduino-library/blob/main/API_Reference_EN.md)|[中文](https://github.com/hzkincony/kc868-arduino-library/blob/main/API_Reference_CN.md)
 
----
-
 This library for KC868-H32B Pro smart controller based on ESP32 chip, you should include "KC868.h" in your code as follows:
 
 ```C++
