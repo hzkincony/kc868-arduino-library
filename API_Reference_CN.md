@@ -1,5 +1,7 @@
 # kc868-arduino-library  API Reference
 
+[English](https://github.com/hzkincony/kc868-arduino-library/blob/main/API_Reference_EN.md)|[中文](https://github.com/hzkincony/kc868-arduino-library/blob/main/API_Reference_CN.md)
+
 这个库是为ESP32系列编写的，暂时没有适配其他arduino单片机型号。使用这个库，只需要包含 `KC868.h` 这个文件，代码如下：
 
 ```C++
