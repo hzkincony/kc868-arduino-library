@@ -76,7 +76,7 @@ This library for KC868-H32B Pro smart controller based on ESP32 chip, you should
 
 - **boolean writeSwitch(int idx, int value)**
 
-  - Turn ON/OFF specified channel relay. The range of parameter 'idx' is 1-32, corresponding to 32 relays; the value of parameter value is 0 and 1, 0 is OFF, 1 is ON
+  - Turn ON/OFF specified channel relay. The range of parameter `idx` is 1-32, corresponding to 32 relays; the value of parameter value is 0 and 1, 0 is OFF, 1 is ON
   - The return value is of type `boolean`, `true` means the operation succeeded, `false` means the operation failed.
   - Code example:
 
@@ -169,7 +169,7 @@ This library for KC868-H32B Pro smart controller based on ESP32 chip, you should
 
     `void SwitchUpdate(uint8_t idx, uint8_t state)`
 
-   function has two parameters, the range of 'idx' is 1-32, corresponding to the channel number of the relay that has changed, the value of state is 0 or 1, 0 means to OFF, and 1 means to ON.
+   function has two parameters, the range of `idx` is 1-32, corresponding to the channel number of the relay that has changed, the value of state is 0 or 1, 0 means to OFF, and 1 means to ON.
   - Code example:
 
 
@@ -188,7 +188,7 @@ This library for KC868-H32B Pro smart controller based on ESP32 chip, you should
 
     `void SwitchUpdate(uint8_t idx, uint8_t state)`
 
-   function has two parameters, the range of 'idx' is 1-6, corresponding to the channel number of the digital input that has changed, the value of state is 0 or 1, 0 means triggered, and 1 means not triggered.
+   function has two parameters, the range of `idx` is 1-6, corresponding to the channel number of the digital input that has changed, the value of state is 0 or 1, 0 means triggered, and 1 means not triggered.
   - Code example:
 
   ```c++
