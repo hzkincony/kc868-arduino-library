@@ -146,9 +146,9 @@ This library for KC868-H32B Pro smart controller based on ESP32 chip, you should
   boolean ret = kc868.readSensor(1);  // read digital input1
   Serial.printf("io1 intput is");
   if(ret)
-    Serial.println("tirgged!");
+    Serial.println("tirggered!");
   else
-    Serial.println("not tirgged.");
+    Serial.println("not tirggered.");
   ```
 
 - **uint8_t readSensorAll()**
