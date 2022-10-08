@@ -146,9 +146,9 @@
   boolean ret = kc868.readSensor(1);//读取开关量1的状态
   Serial.printf("io1 intput is");
   if(ret)
-    Serial.println("tirgged!");
+    Serial.println("tirggered!");
   else
-    Serial.println("not tirgged.");
+    Serial.println("not tirggered.");
   ```
 
 - **uint8_t readSensorAll()**
