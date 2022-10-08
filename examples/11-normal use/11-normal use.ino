@@ -1,7 +1,7 @@
 #include "KC868.h"
 
 
-KC868 kc868(&Serial2,115200);//create a new kc868 object, arg 1:  serial object point , arg 2: baudrate
+KC868 kc868(&Serial2);//create a new kc868 object, arg 1:  serial object point , arg 2: baudrate
 
 
 void SwitchUpdate(uint8_t idx, uint8_t state)
@@ -21,7 +21,7 @@ void setup() {
 
   delay(3000);
 
-  kc868.open();//open the kc868  first
+  kc868.begin(115200);//open the kc868  first
 
   kc868.setReadMode(0);//mode, 0 :default, Query directly; 1: Query all switch state every 2s 
 
@@ -32,13 +32,17 @@ void setup() {
   Serial.println("Write Switch 1 on.");
   kc868.writeSwitch(1,1);
 
+  int ret = kc868.readSwitch(1);
+  Serial.printf("The state of Switch 1 is %d .\n",ret);
+
   Serial.println("Delay 1 second.");
   delay(1000);
 
   Serial.println("Write Switch 1 off.");
   kc868.writeSwitch(1,0);
 
-  //kc868.readSwitchAll();//
+  ret = kc868.readSwitch(1);
+  Serial.printf("The state of Switch 1 is %d .\n",ret);
   
 
 }
