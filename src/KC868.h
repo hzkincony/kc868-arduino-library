@@ -57,10 +57,9 @@ class KC868
 
   _dev_type _type;
   HardwareSerial *_serial;
-  int _baud;
   uint32_t _SwitchCache;//save switch state ,32 bit
   uint32_t _SwitchCache_last=0x00;//save last switch state ,32 bit
-  uint8_t _SensorCache=0XFF;//save sensor input state 
+  uint8_t _SensorCache=0x00;//save sensor input state 
 
   uint8_t _mode;
   hw_timer_t*  tim= NULL;
@@ -83,11 +82,11 @@ class KC868
   _data_pkt pkt;
 
 public:
-  KC868(HardwareSerial *hs, unsigned long baud); //serial
+  KC868(HardwareSerial *hs); //serial
   // KC868(WiFiClient client);         // wificlient
   
-  boolean open();
-  boolean close();
+  boolean begin(unsigned long baud, uint32_t config=SERIAL_8N1, int8_t rxPin=-1, int8_t txPin=-1, bool invert=false, unsigned long timeout_ms = 20000UL, uint8_t rxfifo_full_thrhd = 112);
+  boolean end();
   void poll();
   boolean readSwitch(int idx);
   boolean readSwitchCache(int idx);

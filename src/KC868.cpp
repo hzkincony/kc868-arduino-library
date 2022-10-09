@@ -1,24 +1,24 @@
 #include "KC868.h"
 
-KC868::KC868(HardwareSerial *hs, unsigned long baud)
+KC868::KC868(HardwareSerial *hs)
 {
   _type = dev_serial;
   _serial = hs;
-  _baud = baud;
 }
 
-boolean KC868::open()
+boolean KC868::begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin, bool invert, unsigned long timeout_ms, uint8_t rxfifo_full_thrhd)
+
 {
   if (_type == dev_serial)
   {
-    _serial->begin(_baud);
+    _serial->begin(baud, config, rxPin, txPin, invert, timeout_ms, rxfifo_full_thrhd);
 
   }
 
   return true;
 }
 
-boolean KC868::close()
+boolean KC868::end()
 {
   if (_type == dev_serial)
   {
@@ -48,8 +48,6 @@ boolean KC868::readSwitch(int idx)
   // example  RELAY-READ-255,1,1,OK\0
   sprintf(tmp, "%s,%d,1,OK", READ_RELAY_CMD, idx); //check 'OK' ,otherwise return false
   ret = checkRet(tmp);
-  Serial.printf("---%s---",pkt.rxbuf);
-  Serial.printf("---%d---",ret);
   if (ret)
     return true;
   else
@@ -324,13 +322,14 @@ boolean KC868::readSensor(int idx)
         }
 
         value = atoi(cmd.p1);
+        value = ~value;
         value = (value>>(idx-1))&0x01;
         return value;
       }
     }
   }
     
-  return 1;
+  return 0;
 
 }
 
@@ -368,6 +367,7 @@ uint8_t KC868::readSensorAll()
         }
 
         value = atoi(cmd.p1);
+        value = ~value; 
         return value;
       }
     }
@@ -381,6 +381,30 @@ void KC868::write(char *data, uint16_t len)
 {
   if (_type == dev_serial)
   {
+    bufferPos=0;
+
+      while (_serial->available())
+      {
+
+        uint8_t received = _serial->read();
+          // if((received=='\0')||(received=='\n'))
+          //   break;
+          inputBuffer[bufferPos++] = received;
+          if (bufferPos >= PKT_MAX_LEN)
+          {
+            bufferPos = 0;
+          }
+        
+      }
+      if(bufferPos>0)
+      {
+        //handle one line
+        handleData(inputBuffer, bufferPos);
+
+        memset(inputBuffer, 0, PKT_MAX_LEN);
+        bufferPos = 0;
+      }
+
     memset(pkt.rxbuf, 0, PKT_MAX_LEN);
     _serial->write(data, len);
   }
@@ -589,7 +613,7 @@ void KC868::handleData(char *data, uint16_t len)
           idx = atoi(cmd.p1);
 
           if(SensorChangeHook!=NULL)
-            SensorChangeHook(idx,0);//alarm
+            SensorChangeHook(idx,1);//alarm
 
         }
 
@@ -606,7 +630,7 @@ void KC868::handleData(char *data, uint16_t len)
           idx = atoi(cmd.p1);
 
           if(SensorChangeHook!=NULL)
-            SensorChangeHook(idx,1);//Cancel alarm
+            SensorChangeHook(idx,0);//Cancel alarm
 
 
         }
